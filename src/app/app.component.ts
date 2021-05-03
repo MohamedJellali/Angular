@@ -12,6 +12,26 @@ export class AppComponent {
   appareilTwo = 'Frigo';
   appareilThree = 'Ordinateur';
 
+//test ngFor
+
+appareils = [
+  {
+    name: 'Machine à laver',
+    status: 'éteint'
+  },
+  {
+    name: 'Frigo',
+    status: 'allumé'
+  },
+  {
+    name: 'Ordinateur',
+    status: 'éteint'
+  }
+];
+
+
+
+
   constructor(){
     setTimeout(
       ()=>{this.isAuth = !this.isAuth;},2000
