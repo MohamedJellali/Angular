@@ -1,3 +1,4 @@
+import { AppareilService } from './services/appareil.service';
 import { Component } from '@angular/core';
 
 @Component({
@@ -24,26 +25,29 @@ export class AppComponent {
 
 //test ngFor
 
-appareils = [
-  {
-    name: 'Machine à laver',
-    status: 'éteint'
-  },
-  {
-    name: 'Frigo',
-    status: 'allumé'
-  },
-  {
-    name: 'Ordinateur',
-    status: 'éteint'
-  }
-];
+appareils!: any[];
 
-
-  constructor(){
+  constructor(private appareilService: AppareilService){
     setTimeout(
       ()=>{this.isAuth = !this.isAuth;},2000
     );
   }
-  onAllumer = () => alert("allumés");
+
+ngOnInit(){
+  this.appareils = this.appareilService.appareils;
+
+}
+
+onAllumer(){
+  this.appareilService.switchOnAll();
+}
+onEteindre(){
+  if(confirm('Etes-vous sûr de vouloir éteindre tous vos appareils ?')) {
+    this.appareilService.switchOffAll();
+  } else {
+    return console.log('resté allumé');
+  }
+}
+
+  onAllumerTest = () => alert("allumés");
 }
