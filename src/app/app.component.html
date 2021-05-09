@@ -5,6 +5,9 @@
         <li><a routerLink="auth">Authentification</a></li>
         <li class="active"><a routerLink="appareils">Appareils</a></li>
       </ul>
+      <div class="navbar-right">
+        <p>Vous êtes connecté depuis {{ secondes }} secondes !</p>
+    </div>
     </div>
   </div>
 </nav>
@@ -12,7 +15,6 @@
 <div class="container">
   <div class="row">
     <div class="col-xs-12">
-      <!-- <app-appareil-view></app-appareil-view> -->
       <router-outlet></router-outlet>
     </div>
 
