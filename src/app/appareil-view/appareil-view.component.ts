@@ -59,6 +59,14 @@ onEteindre(){
 
   onAllumerTest = () => alert("allumés");
 
+  onSave() {
+    this.appareilService.saveAppareilsToServer();
+}
+
+onFetch() {
+  this.appareilService.getAppareilsFromServer();
+}
+
   ngOnDestroy() {
     this.appareilSubscription.unsubscribe();
   }

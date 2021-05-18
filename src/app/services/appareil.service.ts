@@ -1,5 +1,8 @@
+import { Injectable } from "@angular/core";
 import { Subject } from "rxjs";
+import { HttpClient } from '@angular/common/http'
 
+@Injectable()
 export class AppareilService {
 
     appareilsSubject = new Subject<any[]>();
@@ -21,6 +24,35 @@ export class AppareilService {
           status: 'éteint'
         }
       ];
+
+      constructor(private httpClient: HttpClient) {}
+
+      saveAppareilsToServer() {
+        this.httpClient
+          .put('https://ocr-project-1cff3-default-rtdb.firebaseio.com/appareils.json', this.appareils)
+          .subscribe(
+            () => {
+              alert('Enregistrement terminé !');
+            },
+            (error) => {
+              alert('Erreur ! : ' + error);
+            }
+          );
+    }
+
+    getAppareilsFromServer() {
+      this.httpClient
+        .get<any[]>('https://ocr-project-1cff3-default-rtdb.firebaseio.com/appareils.json')
+        .subscribe(
+          (response) => {
+            this.appareils = response;
+            this.emitAppareilSubject();
+          },
+          (error) => {
+            console.log('Erreur ! : ' + error);
+          }
+        );
+  }
 
     addAppareil(name: string, status: string){
         const appareilObject = {
