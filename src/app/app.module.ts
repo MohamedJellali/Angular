@@ -5,7 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AppareilComponent } from './appareil/appareil.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppareilService } from './services/appareil.service';
 import { AuthComponent } from './auth/auth.component';
 import { AppareilViewComponent } from './appareil-view/appareil-view.component';
@@ -14,12 +14,17 @@ import { AuthService } from './services/auth.service';
 import { SingleAppareilComponent } from './single-appareil/single-appareil.component';
 import { FourOhFourComponent } from './four-oh-four/four-oh-four.component';
 import { EditAppareilComponent } from './edit-appareil/edit-appareil.component';
+import { UserService } from './services/user.service';
+import { UserListComponent } from './user-list/user-list.component';
+import { NewUserComponent } from './new-user/new-user.component';
 
 const appRoutes: Routes = [
   {path: 'appareils', canActivate: [AuthGuard], component: AppareilViewComponent},
   {path: 'edit', canActivate: [AuthGuard], component: EditAppareilComponent},
   {path: 'appareils/:id', canActivate: [AuthGuard], component: SingleAppareilComponent},
   {path: 'auth', component: AuthComponent},
+  { path: 'users', component: UserListComponent },
+  { path: 'new-user', component: NewUserComponent },
   {path: '', component: AppareilViewComponent},
   {path: 'not-found', component: FourOhFourComponent },
   {path: '**', redirectTo: 'not-found'}
@@ -34,18 +39,22 @@ const appRoutes: Routes = [
     AppareilViewComponent,
     SingleAppareilComponent,
     FourOhFourComponent,
-    EditAppareilComponent
+    EditAppareilComponent,
+    UserListComponent,
+    NewUserComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    ReactiveFormsModule
   ],
   providers: [
     AppareilService,
     AuthService,
-    AuthGuard
+    AuthGuard,
+    UserService
   ],
   bootstrap: [AppComponent]
 })
